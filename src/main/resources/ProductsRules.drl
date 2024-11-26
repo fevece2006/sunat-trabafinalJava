@@ -1,0 +1,29 @@
+import com.fvelasquez.prueba.domain.model.Product;
+
+global org.slf4j.Logger logger;
+
+dialect "mvel"
+
+rule "RulePrice"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        $product : Product( clase == "Vehiculo")
+    then
+        $product.setDescuento( $product.getPrice * 0.1);
+        update($product);
+         System.out.println( $product.getName() + " tiene el 10% de descuento por pertenecer a la clase Vehiculo");
+end
+
+rule "RulePriceOtherClasses"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        $product : Product( clase != "Vehiculo" )
+    then
+        $product.setDescuento( $product.getPrice * 0.2);
+        update($product);
+        System.out.println( $product.getName() + " tiene el 20% de descuento por pertenecer a otras clases");
+end
