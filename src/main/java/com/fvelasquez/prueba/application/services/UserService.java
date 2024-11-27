@@ -52,5 +52,9 @@ public class UserService {
                 });
     }
 
+    public Mono<User> getUserByEmailAndPassword(String email, String password) {
+        return repository.findByEmailAndPassword(email, password)
+                .switchIfEmpty(Mono.error(new UserNotFoundException("Usuario no encontrado con email y contraseña especificados")));
+    }
 
 }

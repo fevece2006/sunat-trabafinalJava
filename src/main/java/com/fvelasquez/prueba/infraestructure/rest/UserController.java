@@ -42,4 +42,19 @@ public class UserController {
         return service.updateUserById(id, user);
     }
 
+    @GetMapping("/login")
+    public Mono<User> loginUser(@RequestParam String email, @RequestParam String password) {
+        return service.getUserByEmailAndPassword(email, password);
+    }
+
+    @GetMapping("/loginH")
+    public Mono<User> loginH(@RequestHeader String email, @RequestHeader String password) {
+        return service.getUserByEmailAndPassword(email, password);
+    }
+
+    @PostMapping("/login")
+    public Mono<User> loginUser(@RequestBody User loginRequest) {
+        return service.getUserByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
+    }
+
 }
