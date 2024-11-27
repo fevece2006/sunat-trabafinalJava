@@ -11,6 +11,7 @@ import lombok.*;
 public class ResponseApi<T> {
     private String status;
     private String message;
+    private String token;
     private T data;
 
 }

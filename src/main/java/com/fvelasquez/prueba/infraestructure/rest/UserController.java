@@ -3,6 +3,7 @@ package com.fvelasquez.prueba.infraestructure.rest;
 import com.fvelasquez.prueba.application.services.UserService;
 import com.fvelasquez.prueba.domain.model.User;
 import com.fvelasquez.prueba.infraestructure.adapter.ResponseApi;
+import com.fvelasquez.prueba.infraestructure.security.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,7 @@ public class UserController {
         return service.updateUserById(id, user);
     }
 
+    /*
     @GetMapping("/login")
     public Mono<User> loginUser(@RequestParam(required = true) String email, @RequestParam(required = true) String password) {
         return service.getUserByEmailAndPassword(email, password);
@@ -66,16 +68,19 @@ public class UserController {
     public Mono<User> loginH(@RequestHeader String email, @RequestHeader String password) {
         return service.getUserByEmailAndPassword(email, password);
     }
+   */
 
     @PostMapping("/login")
     public Mono<ResponseEntity<ResponseApi<User>>> loginUser(@RequestBody User loginRequest) {
-        //return service.getUserByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
+
         return service.getUserByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())
                 .map(user -> {
-                    // Construir el objeto ResponseApi con el usuario resuelto
+                    String token = JwtUtil.generateToken(user.getEmail());
+
                     ResponseApi<User> response = ResponseApi.<User>builder()
                             .status("200")
-                            .message("Usuario Logueado")
+                            .message("Usuario logueado")
+                            .token(token)
                             .data(user)
                             .build();
 
@@ -85,5 +90,6 @@ public class UserController {
 
 
     }
+
 
 }
