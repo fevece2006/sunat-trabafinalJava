@@ -17,6 +17,7 @@ public class JwtUtil {
 
     // Método para generar un token
     public static String generateToken(String username) {
+
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())

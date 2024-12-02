@@ -20,38 +20,32 @@ public class TaskController {
     }
 
     @GetMapping
-    public Flux<Task> getAllTasks(@RequestHeader("Authorization") String authorization) {
-        JwtUtil.validateToken(authorization);
+    public Flux<Task> getAllTasks() {
         return service.getAllTasks();
     }
 
     @GetMapping("/{id}")
-    public Mono<Task> getTaskById(@RequestHeader("Authorization") String authorization, @PathVariable String id) {
-        JwtUtil.validateToken(authorization);
+    public Mono<Task> getTaskById(@PathVariable String id) {
         return service.getTaskById(id);
     }
 
     @PostMapping
-    public Mono<Task> createTask(@RequestHeader("Authorization") String authorization, @RequestBody Task task) {
-        JwtUtil.validateToken(authorization);
+    public Mono<Task> createTask(@RequestBody Task task) {
         return service.createTask(task);
     }
 
     @DeleteMapping("/{id}")
-    public Mono<Void> deleteTaskById(@RequestHeader("Authorization") String authorization, @PathVariable String id) {
-        JwtUtil.validateToken(authorization);
+    public Mono<Void> deleteTaskById(@PathVariable String id) {
         return service.deleteTaskById(id);
     }
 
     @PutMapping("/{id}")
-    public Mono<Task> updateTaskById(@RequestHeader("Authorization") String authorization, @PathVariable String id, @RequestBody Task task) {
-        JwtUtil.validateToken(authorization);
+    public Mono<Task> updateTaskById(@PathVariable String id, @RequestBody Task task) {
         return service.updateTaskById(id, task);
     }
 
     @PatchMapping("/{id}")
-    public Mono<Task> updateStateTaskById(@RequestHeader("Authorization") String authorization, @PathVariable String id, @RequestBody Task task) {
-        JwtUtil.validateToken(authorization);
+    public Mono<Task> updateStateTaskById(@PathVariable String id, @RequestBody Task task) {
         return service.updateStateTaskById(id, task);
     }
 

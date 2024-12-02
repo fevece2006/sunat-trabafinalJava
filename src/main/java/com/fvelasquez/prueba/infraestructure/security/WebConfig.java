@@ -14,8 +14,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/task/**")  // Aplica a todos los endpoints de TaskController
-                .excludePathPatterns("/user/**"); // Excluye rutas públicas si las tienes
+                .addPathPatterns("/products/**")  // Aplica a todos los endpoints de TaskController
+                .excludePathPatterns("/user/**", "/task/**"); // Excluye rutas públicas si las tienes
     }
 }
 
