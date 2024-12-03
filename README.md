@@ -1,4 +1,4 @@
-# **INDRA: Prueba de ingreso** 
+# **SUNAT: Back end para Angular** 
 La aplicación utiliza las tecnologías:
 
 Java 17, gradle, sprint boot, webflux, Resilience4j, mongodb, drools, lombok, circuit breaker, Junit, arquitectura hexagonal.
